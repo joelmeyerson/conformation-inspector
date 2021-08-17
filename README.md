@@ -24,7 +24,7 @@ Quick setup for a conda environment to run the script.
 ### Running the script
 Command to run the script with file inputs and the number of subunits specified. In this example the number of subunits is four. The output is `out.png` and is written to the user working directory.
 
-`python ci.py -i sym.star -c1 c1.star -c2 c2.star -c3 c3.star -n 4`
+`python ci.py -n 4 -i sym.star -c1 c1.star -c2 c2.star -c3 c3.star`
 
 
 
