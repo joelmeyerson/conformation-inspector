@@ -65,6 +65,7 @@ def main():
 
     # visualize output
     gen_stats.stats(data, num_sub)
+    print("")
     print("Finished.")
 
 if __name__ == "__main__":

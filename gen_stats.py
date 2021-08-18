@@ -10,6 +10,8 @@ def stats(data, num_sub):
     # each element in array stores a possible protein conformational composition
     # (e.g. for a tetramer: element 0 will map to 0:4 c1:c2, element 1 will map to 1:3 c1:c2, etc)
     stats = np.zeros([num_sub + 1], dtype=int)
+    c1_tot = 0
+    c2_tot = 0
     for row in data:
         
         if row[2] > 0: # skip protein if one or more subunits are undefined
@@ -17,8 +19,9 @@ def stats(data, num_sub):
         else:
             c1_cnt = row[0] # number of c1 conformations used to define an array index
             stats[c1_cnt] = stats[c1_cnt] + 1
-    
-    
+            c1_tot += row[0]
+            c2_tot += row[1]
+            
     # print results
     print('')
     print('Results:')
@@ -26,7 +29,15 @@ def stats(data, num_sub):
     print('Protein oligomeric state (#): ' + str(num_sub))
     print('Protein oligomers (#): ' + f"{(num_par):,}")
     print('Protein oligomers with one or more unclassified subunit(s) (#): ' + f"{(num_par - sum(stats)):,}" + ' [excluded from analysis]')
-    print('Protein oligomers with all subunits classified (#): ' + f"{(sum(stats)):,}")
+    
+    oligo = f"{(sum(stats)):,}"
+    sub  = f"{(sum(stats) * num_sub):,}"
+    c1 = f"{(c1_tot):,}"
+    c1_frac = f"{round( ((c1_tot/(sum(stats) * num_sub))*100), 2):,}"
+    c2 = f"{(c2_tot):,}"
+    c2_frac = f"{round( ((c2_tot/(sum(stats) * num_sub))*100), 2):,}"
+    
+    print('Protein oligomers with all subunits classified (#): ' + oligo + ' [total subunits included: ' + sub + '; C1 subunits: ' + c1 + ' (' + c1_frac +'%); C2 subunits: ' + c2 + ' (' + c2_frac +'%)]')
     print('')
     print('C1:C2 ratios:')
     
