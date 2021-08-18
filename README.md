@@ -20,7 +20,7 @@ Quick setup for a conda environment to run the script.
 `conda activate ci` # activate environment
 
 ### Running the script
-Command to run the script with file inputs and the number of subunits per protein specified. In this example the number of subunits is four. The output is `out.png` and is written to the user working directory.
+Command to run the script with file inputs and the number of subunits per protein specified. In this example the number of subunits is four. The results are printed to the console.
 
 `python ci.py -n 4 -i sym.star -c1 c1.star -c2 c2.star`
 
