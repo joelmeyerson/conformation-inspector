@@ -15,7 +15,7 @@ Quick setup for a conda environment to run the script.
 
 `conda create -n ci` # create environment
 
-`conda install -n ci matplotlib progress` # install packages
+`conda install -n ci numpy progress` # install packages
 
 `conda activate ci` # activate environment
 
