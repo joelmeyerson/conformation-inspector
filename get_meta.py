@@ -53,7 +53,7 @@ def sub_meta(starfile, nsub):
     with open(starfile, "r") as file:
         
         # create progress spinner
-        with Spinner('Readingmeta data from ' + starfile + ' ') as spinner:
+        with Spinner('Reading metadata from ' + starfile + ' ') as spinner:
             
             for line in file:  
                 # check if line has particle and that img column index has been found

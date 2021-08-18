@@ -1,9 +1,12 @@
 import argparse
 import re
-import matplotlib.pyplot as plt
+import numpy as np
+from collections import Counter
+from progress.bar import Bar
 
 # local imports
 import get_meta
+import gen_stats
 
 def main():
     
@@ -35,18 +38,34 @@ def main():
     if (num_par_c1 + num_par_c2) > num_par_nx:
         print("The number of total subunit conformation particles exceeds the number of symmetry expanded particles. Exiting.")
         exit()
-    
+ 
     # tabulate the conformations for each protein oligomer
-    #iterate through meta_par
-    #for each entry count the number of instances in meta_c1 and meta_c2
-    #check that they sum to 4, if not mark the final column in meta_par
-    
+    data = np.empty([num_par, 3], dtype=int)
+    dict_c1 = Counter(meta_c1)
+    dict_c2 = Counter(meta_c2)
+
+    # create progress bar
+    with Bar('Tabulating subunit conformations for each oligomer', fill='-', suffix='%(percent)d%%', max=num_par) as bar:
+
+        for i in range(num_par):
+            parname = meta_par[i][0]
+            cnt_c1 = dict_c1[parname]
+            cnt_c2 = dict_c2[parname]
+            cnt_other = num_sub - cnt_c1 - cnt_c2 # accounts for unclassified subunits in an oligomer
+
+            if (cnt_c1 + cnt_c2 + cnt_other) != num_sub:
+                print("Something went wrong in tabulating the conformations for " + parname + ". Exiting")
+                exit()
+
+            # update meta_par to hold the conformation counts
+            data[i, 0] = cnt_c1
+            data[i, 1] = cnt_c2
+            data[i, 2] = cnt_other
+            bar.next()
+
     # visualize output
-    #make table
-    #total particles and subunits
-    #num in c1, c2, and other
-    #num tetramers with 4, 3, 2, and 1 subunits assigned
-    #for tetramers with all four subunits, plot histogram showing their distribution
+    gen_stats.stats(data, num_sub)
+    print("Finished.")
 
 if __name__ == "__main__":
     main()
