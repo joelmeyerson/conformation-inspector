@@ -21,18 +21,30 @@ def main():
     [num_par_c1, meta_c1] = get_sub_meta(args.conformation1, num_sub)
     [num_par_c2, meta_c2] = get_sub_meta(args.conformation2, num_sub)
     
-    # confirm that particle counts make sense
-    # if num_par % num_sub != 0:
-#         print("The number of particles in " + args.symexpand + " is not a multiple of " + str(num_sub) +". Exiting.")
-#         exit()
-#
-#     if (num_c1 > num_par or num_c2 > num_par):
-#         print("The number of particles in each of the STAR files for subunit conformations should be fewer than in the symmetry expanded STAR file. Exiting.")
-#         exit()
-#
-#     if (num_c1 + num_c2) > num_par:
-#         print("The number of total subunit conformation particles exceeds the symmetry expanded particles. Exiting.")
-#         exit()
+    # confirm that particle and subunit counts make sense
+    if num_par_nx / num_par != num_sub:
+        print("The number of particles in " + args.symexpand + " is not a multiple of " + str(num_sub) +". Exiting.")
+        exit()
+    
+    if (num_par_c1 > num_par_nx or num_par_c2 > num_par_nx):
+        print("The number of particles in each of the subunit conformation STAR files should be fewer than the number of particles in the symmetry expanded STAR file. Exiting.")
+        exit()
+
+    if (num_par_c1 + num_par_c2) > num_par_nx:
+        print("The number of total subunit conformation particles exceeds the number of symmetry expanded particles. Exiting.")
+        exit()
+    
+    # tabulate the conformations for each protein oligomer
+    #iterate through meta_par
+    #for each entry count the number of instances in meta_c1 and meta_c2
+    #check that they sum to 4, if not mark the final column in meta_par
+    
+    # visualize output
+    #make table
+    #total particles and subunits
+    #num in c1, c2, and other
+    #num tetramers with 4, 3, 2, and 1 subunits assigned
+    #for tetramers with all four subunits, plot histogram showing their distribution
     
 # get relevant metadata from sym.star
 def get_par_meta(starfile, nsub):
