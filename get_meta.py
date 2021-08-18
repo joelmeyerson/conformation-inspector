@@ -1,5 +1,4 @@
 import re
-import matplotlib.pyplot as plt
 from progress.spinner import Spinner
 
 # get relevant metadata from sym.star
