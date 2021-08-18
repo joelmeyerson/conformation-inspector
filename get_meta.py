@@ -1,4 +1,3 @@
-import argparse
 import re
 import matplotlib.pyplot as plt
 from progress.spinner import Spinner
