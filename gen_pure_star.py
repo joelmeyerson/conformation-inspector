@@ -1,3 +1,5 @@
+# gen_pure_star.py
+
 import re
 from progress.spinner import Spinner
 

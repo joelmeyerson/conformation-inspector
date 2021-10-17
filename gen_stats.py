@@ -1,3 +1,5 @@
+# gen_stats.py
+
 import numpy as np
 
 def stats(data, num_sub):
