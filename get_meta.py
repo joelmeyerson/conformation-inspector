@@ -47,7 +47,7 @@ def par_meta(starfile, nsub):
 def sub_meta(starfile, nsub):
     
     num_par = 0 # total particle entries in star
-    meta = []
+    meta = [] # store particle names
     with open(starfile, "r") as file:
         
         # create progress spinner

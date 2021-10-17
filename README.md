@@ -10,6 +10,10 @@ The script assumes there are two interpretable subunit conformations (C1 and C2)
 
 `c2.star` STAR file with particles for conformation 2.
 
+Optionally, the parent oligomer star file can be provided and it will be used to generate new star files for the subset of oligomers that have "pure" C1 and C2 conformations. For example, if the oligomer is a trimer this option will return all trimers that have three C1 subunits (`pure_c1.star`), and all trimers that have three C2 subunits (`pure_c2.star`).
+
+`oligomer.star` STAR file with oligomer particles (typically the input used during symmetry expansion).
+
 ### Conda environment
 Quick setup for a conda environment to run the script.
 
@@ -24,5 +28,6 @@ Command to run the script with file inputs and the number of subunits per protei
 
 `python ci.py -n 4 -i sym.star -c1 c1.star -c2 c2.star`
 
+If running with the option to generate "pure" STAR files.
 
-
+`python ci.py -n 4 -i sym.star -c1 c1.star -c2 c2.star -o oligomer.star`

@@ -7,6 +7,7 @@ from progress.bar import Bar
 # local imports
 import get_meta
 import gen_stats
+import gen_pure_star
 
 def main():
     
@@ -16,6 +17,7 @@ def main():
     parser.add_argument('-c1', '--conformation1', type=str, help='star file with particles in subunit conformation 1', required=True)
     parser.add_argument('-c2', '--conformation2', type=str, help='star file with particles in subunit conformation 2', required=True)
     parser.add_argument('-n', '--numsubunits', type=int, help='number of subunits', required=True)
+    parser.add_argument('-o', '--oligostar', type=str, help='star file with oligomers, used to to generate star files containing conformationally homogeneous ("pure") oligomers', required=False)
     args = parser.parse_args()
     
     # make list with particle oligomer name, x coordinate, y coordinate, and make list entries to store subunit counts
@@ -66,6 +68,19 @@ def main():
     # visualize output
     gen_stats.stats(data, num_sub)
     print("")
+
+    # generate star files containing oligomers with pure C1 and C2
+    # requires that user provide optional oligomer star file with -o option
+    if args.oligostar:
+        print("Writing star files with pure C1 and C2 oligomers.")
+        print("")
+        gen_pure_star.gen(dict_c1, args.oligostar, "pure_c1.star")
+        print("File written for pure C1 oligomers (pure_c1.star)")
+        print("")
+        gen_pure_star.gen(dict_c2, args.oligostar, "pure_c2.star")
+        print("File written for pure C2 oligomers (pure_c2.star)")
+        print("")
+    
     print("Finished.")
 
 if __name__ == "__main__":
