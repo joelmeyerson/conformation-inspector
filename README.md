@@ -26,8 +26,8 @@ Quick setup for a conda environment to run the script.
 ### Running the script
 Command to run the script with file inputs and the number of subunits per protein specified. In this example the number of subunits is four. The results are printed to the console.
 
-`python ci.py -n 4 -i sym.star -c1 c1.star -c2 c2.star`
+`python ci.py -n 4 -s sym.star -c1 c1.star -c2 c2.star`
 
 If running with the option to generate "pure" STAR files.
 
-`python ci.py -n 4 -i sym.star -c1 c1.star -c2 c2.star -o oligomer.star`
+`python ci.py -n 4 -s sym.star -c1 c1.star -c2 c2.star -o oligomer.star`
